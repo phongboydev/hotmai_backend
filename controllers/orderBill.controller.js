@@ -4,30 +4,30 @@ var fs = require("fs");
 // All allOrderBill
 const allOrderBill = async (req, res) => {
   try {
-   const listOrderBill = await OrderBill.findAll({
-    include: [
-      {
-        model: Account,
-        as: "accountOrdered",
-      },
-      {
-        model: User,
-        as: "user",
-      },
-    ],
-   });
+    const listOrderBill = await OrderBill.findAll({
+      include: [
+        {
+          model: Account,
+          as: "accountOrdered",
+        },
+        {
+          model: User,
+          as: "user",
+        },
+      ],
+    });
 
-   if(listOrderBill){
-    res.status(200).json({
-      isSuccess: true,
-      data: listOrderBill,
-    });
-   } else {
-    res.status(500).json({
-      isSuccess: false,
-      data: null,
-    });
-   }
+    if (listOrderBill) {
+      res.status(200).json({
+        isSuccess: true,
+        data: listOrderBill,
+      });
+    } else {
+      res.status(500).json({
+        isSuccess: false,
+        data: null,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       isSuccess: false,
@@ -159,12 +159,12 @@ const getDetailOrderBillUser = async (req, res) => {
 
 const getDetailOrderBillUserId = async (req, res) => {
   try {
-     console.log("12345");
+    console.log("12345");
     const order_id = parseInt(req.query.orderBill_id);
     const userId = parseInt(req.query.account_id);
 
     //check exit order
-   let orderBill = await OrderBill.findOne({
+    let orderBill = await OrderBill.findOne({
       where: {
         id: order_id,
       },
@@ -184,9 +184,7 @@ const getDetailOrderBillUserId = async (req, res) => {
           isSuccess: true,
           data: listAccountSales,
         });
-      }
-      else {
-       
+      } else {
         res.status(401).json({
           isSuccess: false,
           data: "Không phải bạn đang đăng nhập ",
@@ -198,9 +196,7 @@ const getDetailOrderBillUserId = async (req, res) => {
         data: "Bill này thực sự không tồn tại ",
       });
     }
-
-  }
-  catch(error){
+  } catch (error) {
     console.log(error);
     res.status(400).json({
       isSuccess: false,
@@ -209,14 +205,14 @@ const getDetailOrderBillUserId = async (req, res) => {
   }
 };
 
-const deleteOrderBill = async (req,res) => {
+const deleteOrderBill = async (req, res) => {
   const id = req.params.id;
   const orderBill = await OrderBill.destroy({
-    where : {
-      id : id
-    }
-  })
-  if(orderBill){
+    where: {
+      id: id,
+    },
+  });
+  if (orderBill) {
     res.status(200).json({
       isSuccess: true,
       data: orderBill,
@@ -226,7 +222,7 @@ const deleteOrderBill = async (req,res) => {
     isSuccess: false,
     data: orderBill,
   });
-}
+};
 module.exports = {
   allOrderBill,
   createOrderBill,
@@ -234,5 +230,5 @@ module.exports = {
   downloadFileOrderBill,
   getDetailOrderBillUser,
   getDetailOrderBillUserId,
-  deleteOrderBill
+  deleteOrderBill,
 };

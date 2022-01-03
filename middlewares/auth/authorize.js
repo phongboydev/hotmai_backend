@@ -9,44 +9,40 @@ const authorize = (arrType) => (req, res, next) => {
   }
 };
 
-const checkBalanceUser =async (req, res, next) => {
-  const {user_id,totalMoney} = req.body;
-  console.log("id : ", user_id)
+const checkBalanceUser = async (req, res, next) => {
+  const { user_id, totalMoney } = req.body;
+  console.log("id : ", user_id);
   var user = await User.findOne({
-    where : {
-        id: user_id,    
+    where: {
+      id: user_id,
     },
-    raw : true
+    raw: true,
   });
-  if(user.balance < totalMoney)
-  {
+  if (user.balance < totalMoney) {
     res.status(200).json({
-        isSuccess: false,
-        data: "bạn không đủ số dư",
-      });
-  }
-  else{
+      isSuccess: false,
+      data: "bạn không đủ số dư",
+    });
+  } else {
     next();
   }
 };
 
-const checkAdmin =async (req, res, next) => {
-  const {user_id,totalMoney} = req.body;
-  console.log("id : ", user_id)
+const checkAdmin = async (req, res, next) => {
+  const { user_id, totalMoney } = req.body;
+  console.log("id : ", user_id);
   var user = await User.findOne({
-    where : {
-        id: user_id,    
+    where: {
+      id: user_id,
     },
-    raw : true
+    raw: true,
   });
-  if(user.role !== 'admin')
-  {
+  if (user.role !== "admin") {
     res.status(403).json({
-        isSuccess: false,
-        data: "Bạn không có quyền",
-      });
-  }
-  else{
+      isSuccess: false,
+      data: "Bạn không có quyền",
+    });
+  } else {
     next();
   }
 };
@@ -54,5 +50,5 @@ const checkAdmin =async (req, res, next) => {
 module.exports = {
   authorize,
   checkBalanceUser,
-  checkAdmin
+  checkAdmin,
 };

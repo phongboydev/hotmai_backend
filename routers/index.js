@@ -13,7 +13,6 @@ rootRouter.use("/accountSales", accountSaleRouter);
 rootRouter.use("/orderBill", orderBillRouter);
 rootRouter.use("/account", accountRouter);
 
-
 module.exports = {
-    rootRouter
+  rootRouter,
 };

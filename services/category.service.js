@@ -74,7 +74,7 @@ const getListByCondition = async () => {
         },
       ],
     });
-  
+
     if (categoryList) {
       return categoryList;
     }
@@ -82,7 +82,7 @@ const getListByCondition = async () => {
   } catch (error) {
     console.log(error);
   }
-  
+
   return false;
 };
 const updateAmountAccount = async () => {
@@ -101,12 +101,12 @@ const updateAmountAccount = async () => {
       group: ["account_id"],
     });
 
-     for (var i = 0; i < list_Account_Id.length; i++) {
-       let amount = list_Account_Id[i].dataValues.count_account_id;
-       let id = list_Account_Id[i].dataValues.account_id;
+    for (var i = 0; i < list_Account_Id.length; i++) {
+      let amount = list_Account_Id[i].dataValues.count_account_id;
+      let id = list_Account_Id[i].dataValues.account_id;
       await Account.update(
         {
-          amount: amount
+          amount: amount,
         },
         {
           where: {
